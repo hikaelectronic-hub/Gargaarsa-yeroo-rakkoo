@@ -17,6 +17,17 @@
     <p id="status" role="status" aria-live="polite"></p>
     <button id="stopAlarm" class="secondary" type="button" hidden>🔕 Alarm dhaabi</button>
   </section>
+  <section class="panel emergency-options">
+    <h2 data-i18n="chooseHelp">Gargaarsa barbaaddu filadhu</h2>
+    <p data-i18n="chooseHelpNote">Tajaajila barbaaddu filadhu. Bilbilli ykn kaartaan hayyama kee gaafata.</p>
+    <div class="actions emergency-grid">
+      <a id="policeCall" class="call" href="tel:991">🚓 <span data-i18n="policeCall">Poolisii bilbili (991)</span></a>
+      <a id="hospitalFind" class="call" href="https://www.openstreetmap.org/search?query=hospital%20near%20me" target="_blank" rel="noopener">🏥 <span data-i18n="hospitalFind">Hospitaala naannoo koo barbaadi</span></a>
+      <a id="fireFind" class="call" href="https://www.openstreetmap.org/search?query=fire%20station%20near%20me" target="_blank" rel="noopener">🚒 <span data-i18n="fireFind">Tajaajila ibidda barbaadi</span></a>
+      <button id="alarmNow" class="alarm-button" type="button">🚨 <span data-i18n="alarmNow">Alarm sagalee kaasii</span></button>
+    </div>
+    <p class="small-note" data-i18n="emergencyNote">Poolisii: 991. Lakkoofsa ambulaansii ykn ibiddaa naannoo kee mirkaneeffadhu. Kaartaan internet barbaada.</p>
+  </section>
   <section class="panel">
     <h2 data-i18n="contacts">Namoota amanamoo</h2>
     <label><span data-i18n="name">Maqaa</span><input id="contactName" placeholder="Fakkeenya: Maatii"></label>
