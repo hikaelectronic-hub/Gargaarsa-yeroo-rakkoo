@@ -1,0 +1,24 @@
+const $=id=>document.getElementById(id);
+const translations={
+om:{app:"Gargaarsa Yeroo Rakkoo",intro:"Yeroo rakkoo keessa jirtu, nama ati amanattu saffisaan beeksisi.",need:"Gargaarsa hatattamaa barbaaddaa?",hint:"SOS tuqi. Ergaa fi bilbila osoo hin ergin dura mirkaneessa argatta.",contacts:"Namoota amanamoo",name:"Maqaa",phone:"Lakkoofsa bilbilaa (+251...)",save:"Kuusi",quick:"Bilbila hatattamaa",numberNote:"Lakkoofsa naannoo kee mirkaneeffadhu; lakkoofsa sirrii hin beekne hin tilmaamin.",emergencyNumber:"Lakkoofsa hatattamaa naannoo kee",call:"Bilbili",nearby:"Gargaarsa naannoo kee",nearbyNote:"Kaartaa irratti tajaajila naannoo kee barbaadi. Bu'aan argamu mirkanaa'uu qaba.",health:"Hospitaala",police:"Poolisii",fire:"Ibidda / Fayyisummaa"},
+en:{app:"Emergency Help",intro:"Quickly alert someone you trust when you are in trouble.",need:"Do you need urgent help?",hint:"Press SOS. You will confirm before opening a message or call.",contacts:"Trusted contacts",name:"Name",phone:"Phone number (+country code)",save:"Save",quick:"Emergency call",numberNote:"Verify your local emergency number; do not guess it.",emergencyNumber:"Your verified local emergency number",call:"Call",nearby:"Nearby help",nearbyNote:"Search local services on a map. Verify results before relying on them.",health:"Hospital",police:"Police",fire:"Fire / Rescue"}
+};
+let contacts=JSON.parse(localStorage.getItem("trustedContacts")||"[]"), locationText="";
+function renderContacts(){ $("contactList").innerHTML=""; contacts.forEach((c,i)=>{const li=document.createElement("li");li.textContent=`${c.name}: ${c.phone} `;const b=document.createElement("button");b.textContent="✕";b.onclick=()=>{contacts.splice(i,1);persist()};li.append(b);$("contactList").append(li)})}
+function persist(){localStorage.setItem("trustedContacts",JSON.stringify(contacts));renderContacts()}
+$("save").onclick=()=>{const name=$("contactName").value.trim(),phone=$("contactPhone").value.trim();if(!name||!/^\+?[0-9\s()-]{7,20}$/.test(phone)){alert("Maqaa fi lakkoofsa bilbilaa sirrii galchi.");return}contacts.push({name,phone});$("contactName").value="";$("contactPhone").value="";persist()};
+$("emergencyNumber").addEventListener("input",()=>{const n=$("emergencyNumber").value.replace(/[^+0-9]/g,"");$("callEmergency").href=n?`tel:${n}`:"#";$("callEmergency").classList.toggle("disabled",!n);$("callEmergency").setAttribute("aria-disabled",String(!n))});
+function mapLinks(lat,lon){const q=encodeURIComponent(`${lat},${lon}`);["health","police","fire"].forEach((id,i)=>{const terms=["hospital","police station","fire station"][i];$(id).href=`https://www.openstreetmap.org/search?query=${encodeURIComponent(terms+" near "+lat+","+lon)}`})}
+async function getLocation(){return new Promise(resolve=>{if(!navigator.geolocation){resolve(null);return}navigator.geolocation.getCurrentPosition(p=>resolve({lat:p.coords.latitude,lon:p.coords.longitude}),()=>resolve(null),{enableHighAccuracy:true,timeout:10000,maximumAge:30000})})}
+$("sos").onclick=async()=>{if(!contacts.length){$("status").textContent="Duraan maqaa fi lakkoofsa nama amanamaa tokkoo galchi.";return}
+if(!confirm("SOS ergaa qopheessuuf itti fufuu barbaaddaa?"))return;
+$("status").textContent="Bakka kee barbaadaa...";
+const pos=await getLocation();locationText=pos?`Bakka koo: https://www.openstreetmap.org/?mlat=${pos.lat}&mlon=${pos.lon}#map=17/${pos.lat}/${pos.lon}`:"Bakka koo argachuun hin danda'amne.";
+if(pos)mapLinks(pos.lat,pos.lon);
+const body=encodeURIComponent(`GARGAARSA HATATTAMAA BARBAADA! ${locationText}`);
+const phones=contacts.map(c=>c.phone).join(",");
+$("status").textContent="Ergaan qophaa'eera. Erguuf appii SMS keessatti mirkaneessi.";
+window.location.href=`sms:${phones}?body=${body}`;
+};
+$("language").onchange=e=>{const t=translations[e.target.value];document.querySelectorAll("[data-i18n]").forEach(el=>{const k=el.dataset.i18n;if(t[k])el.textContent=t[k]});document.documentElement.lang=e.target.value};
+renderContacts();
