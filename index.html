@@ -7,7 +7,7 @@
 </head>
 <body>
 <header><div class="brand">🆘 <span data-i18n="app">Gargaarsa Yeroo Rakkoo</span></div>
-<select id="language" aria-label="Language"><option value="om">Afaan Oromoo</option><option value="en">English</option></select></header>
+<select id="language" aria-label="Language"><option value="om">Afaan Oromoo</option><option value="am">አማርኛ</option><option value="en">English</option></select></header>
 <main>
   <p class="intro" data-i18n="intro">Yeroo rakkoo keessa jirtu, nama ati amanattu saffisaan beeksisi.</p>
   <section class="sos-card">
@@ -24,24 +24,24 @@
     <ul id="contactList"></ul>
   </section>
   <section class="panel">
-    <h2>Sagalee gargaarsaa</h2>
-    <p>Sagalee kee waraabi; booda nama amanamaa waliin qoodi. Browser fi bilbila kee hayyama gaafachuu danda'u.</p>
+    <h2 data-i18n="voiceTitle">Sagalee gargaarsaa</h2>
+    <p data-i18n="voiceNote">Sagalee kee waraabi; booda nama amanamaa waliin qoodi. Browser fi bilbila kee hayyama gaafachuu danda'u.</p>
     <div class="actions">
-      <button id="recordVoice" class="secondary">🎙️ Waraabuu jalqabi</button>
-      <button id="stopVoice" class="secondary" disabled>⏹️ Dhaabi</button>
+      <button id="recordVoice" class="secondary" data-i18n="record">🎙️ Waraabuu jalqabi</button>
+      <button id="stopVoice" class="secondary" disabled data-i18n="stop">⏹️ Dhaabi</button>
     </div>
     <audio id="voicePreview" controls hidden></audio>
     <div class="actions">
-      <button id="shareVoice" class="secondary" disabled>📤 Sagalee qoodi</button>
-      <a id="callTrusted" class="call disabled" href="#" aria-disabled="true">📞 Nama amanamaa bilbili</a>
+      <button id="shareVoice" class="secondary" disabled data-i18n="shareVoice">📤 Sagalee qoodi</button>
+      <a id="callTrusted" class="call disabled" href="#" aria-disabled="true">📞 <span data-i18n="callTrusted">Nama amanamaa bilbili</span></a>
     </div>
     <p id="voiceStatus" role="status" aria-live="polite"></p>
   </section>
   <section class="panel">
     <h2 data-i18n="quick">Bilbila hatattamaa</h2>
     <p data-i18n="numberNote">Lakkoofsa naannoo kee mirkaneeffadhu; lakkoofsa sirrii hin beekne hin tilmaamin.</p>
-    <label><span data-i18n="emergencyNumber">Lakkoofsa hatattamaa naannoo kee</span><input id="emergencyNumber" type="tel" placeholder="Lakkoofsa mirkanaa'e galchi"></label>
-    <a id="callEmergency" class="call disabled" href="#" aria-disabled="true" data-i18n="call">Bilbili</a>
+    <label><span data-i18n="emergencyNumber">Lakkoofsa hatattamaa naannoo kee</span><input id="emergencyNumber" type="tel" value="991" placeholder="Lakkoofsa mirkanaa'e galchi"></label>
+    <a id="callEmergency" class="call" href="tel:991" data-i18n="call">Bilbili</a>
   </section>
   <section class="panel">
     <h2 data-i18n="nearby">Gargaarsa naannoo kee</h2>
@@ -53,6 +53,6 @@
     </div>
   </section>
 </main>
-<footer>Prototype • Odeeffannoo dhuunfaa kee eegi. SOS kun ergaa ofumaan hin ergu.</footer>
+<footer data-i18n="footer">Prototype • Odeeffannoo dhuunfaa kee eegi. SOS kun ergaa ofumaan hin ergu.</footer>
 <script src="app.js"></script>
 </body></html>
