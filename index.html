@@ -24,6 +24,20 @@
     <ul id="contactList"></ul>
   </section>
   <section class="panel">
+    <h2>Sagalee gargaarsaa</h2>
+    <p>Sagalee kee waraabi; booda nama amanamaa waliin qoodi. Browser fi bilbila kee hayyama gaafachuu danda'u.</p>
+    <div class="actions">
+      <button id="recordVoice" class="secondary">🎙️ Waraabuu jalqabi</button>
+      <button id="stopVoice" class="secondary" disabled>⏹️ Dhaabi</button>
+    </div>
+    <audio id="voicePreview" controls hidden></audio>
+    <div class="actions">
+      <button id="shareVoice" class="secondary" disabled>📤 Sagalee qoodi</button>
+      <a id="callTrusted" class="call disabled" href="#" aria-disabled="true">📞 Nama amanamaa bilbili</a>
+    </div>
+    <p id="voiceStatus" role="status" aria-live="polite"></p>
+  </section>
+  <section class="panel">
     <h2 data-i18n="quick">Bilbila hatattamaa</h2>
     <p data-i18n="numberNote">Lakkoofsa naannoo kee mirkaneeffadhu; lakkoofsa sirrii hin beekne hin tilmaamin.</p>
     <label><span data-i18n="emergencyNumber">Lakkoofsa hatattamaa naannoo kee</span><input id="emergencyNumber" type="tel" placeholder="Lakkoofsa mirkanaa'e galchi"></label>
